@@ -13,5 +13,5 @@ message UserThemesRequest {
 }
 
 message RawResponse {
-  bytes jsonData = 1;
+  string jsonData = 1; // Trả nguyên JSON từ Spring Boot về gRPC Client
 }
