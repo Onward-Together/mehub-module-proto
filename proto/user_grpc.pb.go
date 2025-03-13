@@ -26,7 +26,7 @@ const (
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type UserServiceClient interface {
-	GetUserThemes(ctx context.Context, in *UserThemesRequest, opts ...grpc.CallOption) (*UserThemesResponse, error)
+	GetUserThemes(ctx context.Context, in *UserThemesRequest, opts ...grpc.CallOption) (*RawResponse, error)
 }
 
 type userServiceClient struct {
@@ -37,9 +37,9 @@ func NewUserServiceClient(cc grpc.ClientConnInterface) UserServiceClient {
 	return &userServiceClient{cc}
 }
 
-func (c *userServiceClient) GetUserThemes(ctx context.Context, in *UserThemesRequest, opts ...grpc.CallOption) (*UserThemesResponse, error) {
+func (c *userServiceClient) GetUserThemes(ctx context.Context, in *UserThemesRequest, opts ...grpc.CallOption) (*RawResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(UserThemesResponse)
+	out := new(RawResponse)
 	err := c.cc.Invoke(ctx, UserService_GetUserThemes_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
@@ -51,7 +51,7 @@ func (c *userServiceClient) GetUserThemes(ctx context.Context, in *UserThemesReq
 // All implementations must embed UnimplementedUserServiceServer
 // for forward compatibility.
 type UserServiceServer interface {
-	GetUserThemes(context.Context, *UserThemesRequest) (*UserThemesResponse, error)
+	GetUserThemes(context.Context, *UserThemesRequest) (*RawResponse, error)
 	mustEmbedUnimplementedUserServiceServer()
 }
 
@@ -62,7 +62,7 @@ type UserServiceServer interface {
 // pointer dereference when methods are called.
 type UnimplementedUserServiceServer struct{}
 
-func (UnimplementedUserServiceServer) GetUserThemes(context.Context, *UserThemesRequest) (*UserThemesResponse, error) {
+func (UnimplementedUserServiceServer) GetUserThemes(context.Context, *UserThemesRequest) (*RawResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetUserThemes not implemented")
 }
 func (UnimplementedUserServiceServer) mustEmbedUnimplementedUserServiceServer() {}

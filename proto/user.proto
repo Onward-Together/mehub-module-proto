@@ -5,13 +5,13 @@ package user;
 option go_package = "github.com/Onward-Together/mehub-module-proto/proto";
 
 service UserService {
-  rpc GetUserThemes (UserThemesRequest) returns (UserThemesResponse);
+  rpc GetUserThemes (UserThemesRequest) returns (RawResponse);
 }
 
 message UserThemesRequest {
-  string user_id = 1;
+  int32 userId = 1;
 }
 
-message UserThemesResponse {
-  string theme_name = 1;
+message RawResponse {
+  string jsonData = 1; // Trả nguyên JSON từ Spring Boot về gRPC Client
 }
