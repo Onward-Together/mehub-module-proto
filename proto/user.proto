@@ -1,0 +1,17 @@
+syntax = "proto3";
+
+package user;
+
+option go_package = "github.com/Onward-Together/mehub-module-proto/proto";
+
+service UserService {
+  rpc GetUserThemes (UserThemesRequest) returns (UserThemesResponse);
+}
+
+message UserThemesRequest {
+  string user_id = 1;
+}
+
+message UserThemesResponse {
+  string theme_name = 1;
+}
