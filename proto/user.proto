@@ -2,6 +2,7 @@ syntax = "proto3";
 
 package user;
 
+	import "google/protobuf/struct.proto"; 
 option go_package = "github.com/Onward-Together/mehub-module-proto/proto";
 
 service UserService {
@@ -13,5 +14,5 @@ message UserThemesRequest {
 }
 
 message RawResponse {
-  bytes jsonData = 1; // Trả nguyên JSON từ Spring Boot về gRPC Client
+  google.protobuf.Struct jsonData = 1;
 }
